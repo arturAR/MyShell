@@ -8,7 +8,7 @@ public class MyShell {
     private String prompt = "$";
     private boolean running = true;
     private File currentDirectory;
-    private HashMap<String, Integer[]> statistics;
+    private HashMap<String, StatisticElement> statistics;
 
     public MyShell() {
         currentDirectory = new File(new File("").getAbsolutePath());
@@ -51,7 +51,7 @@ public class MyShell {
         this.currentDirectory = currentDirectory;
     }
 
-    HashMap<String,Integer[]> getStatistics() {
+    HashMap<String, StatisticElement> getStatistics() {
         return statistics;
     }
 }

@@ -1,7 +1,6 @@
 package com.javaAcademy.MyShell.shell;
 
 import com.javaAcademy.MyShell.commands.Command;
-import com.javaAcademy.MyShell.shell.MyShell;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -12,7 +11,7 @@ import java.util.Map;
 public class ShellManager {
 
     private MyShell myShell;
-    private HashMap<String, Integer[]> statistics;
+    private HashMap<String, StatisticElement> statistics;
 
     public ShellManager(MyShell myShell) {
         this.myShell = myShell;
@@ -40,29 +39,29 @@ public class ShellManager {
     }
 
     public void showStatistics() {
-        for(Map.Entry<String, Integer[]> el: statistics.entrySet()) {
-            System.out.println("["+el.getKey()+"]: " + el.getValue()[0] + " : " + el.getValue()[1]);
+        for(Map.Entry<String, StatisticElement> el: statistics.entrySet()) {
+            System.out.println("["+el.getKey()+"]: " + el.getValue().getCorrect() + " : " + el.getValue().getNotCorrect());
         }
     }
 
     private void incrementValue(String className, Boolean withoutErrors) {
         if(withoutErrors) {
-            myShell.getStatistics().get(className)[0]++;
+            myShell.getStatistics().get(className).incrementCorrect();
         } else {
-            myShell.getStatistics().get(className)[1]++;
+            myShell.getStatistics().get(className).incrementNotCorrect();
         }
     }
 
     public void updateStatistics(Command command, Boolean withoutErrors) {
-        Integer[] tab = null;
+        StatisticElement tab = null;
         String className = command.getClass().getSimpleName();
-        for(Map.Entry<String, Integer[]> el: statistics.entrySet()) {
+        for(Map.Entry<String, StatisticElement> el: statistics.entrySet()) {
             if(className.equals(el.getKey())) {
                 tab = el.getValue();
             }
         }
         if(tab == null) {
-            statistics.put(className, new Integer[]{0, 0});
+            statistics.put(className, new StatisticElement());
         }
         incrementValue(className, withoutErrors);
     }
