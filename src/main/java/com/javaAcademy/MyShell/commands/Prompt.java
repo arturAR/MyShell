@@ -1,6 +1,6 @@
 package com.javaAcademy.MyShell.commands;
 
-import com.javaAcademy.MyShell.MyShell;
+import com.javaAcademy.MyShell.shell.ShellManager;
 
 public class Prompt implements Command {
 
@@ -11,7 +11,7 @@ public class Prompt implements Command {
     }
 
     @Override
-    public void execute(MyShell shell) {
+    public void execute(ShellManager shell) {
         switch (parameter) {
             case "reset":
                 shell.setPrompt("$");

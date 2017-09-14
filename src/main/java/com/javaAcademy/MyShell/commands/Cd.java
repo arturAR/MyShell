@@ -1,12 +1,10 @@
 package com.javaAcademy.MyShell.commands;
 
-
-import com.javaAcademy.MyShell.MyShell;
-import com.javaAcademy.MyShell.WrongCommandException;
+import com.javaAcademy.MyShell.shell.ShellManager;
+import com.javaAcademy.MyShell.exception.WrongCommandException;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class Cd implements Command {
 
@@ -17,7 +15,7 @@ public class Cd implements Command {
     }
 
     @Override
-    public void execute(MyShell myShell) {
+    public void execute(ShellManager myShell) {
         switch (parameter) {
             case (".."):
                 selectParentDirectory(myShell);
@@ -28,14 +26,14 @@ public class Cd implements Command {
         }
     }
 
-    private void selectParentDirectory(MyShell myShell) {
+    private void selectParentDirectory(ShellManager myShell) {
         if (myShell.getCurrentDirectory().getParentFile() != null) {
             myShell.setCurrentDirectory(myShell.getCurrentDirectory().getParentFile());
         }
     }
 
-    private void selectChildDirectory(MyShell myShell, String folderName) {
-        ArrayList<File> folderContents = myShell.getFolderContents(myShell);
+    private void selectChildDirectory(ShellManager myShell, String folderName) {
+        ArrayList<File> folderContents = myShell.getFolderContents();
         boolean flag = false;
         File file = null;
         for (File f : folderContents) {

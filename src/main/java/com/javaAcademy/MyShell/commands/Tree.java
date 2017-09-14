@@ -1,7 +1,7 @@
 package com.javaAcademy.MyShell.commands;
 
-import com.javaAcademy.MyShell.MyShell;
-import com.javaAcademy.MyShell.WrongCommandException;
+import com.javaAcademy.MyShell.shell.ShellManager;
+import com.javaAcademy.MyShell.exception.WrongCommandException;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -16,7 +16,7 @@ public class Tree implements Command {
     }
 
     @Override
-    public void execute(MyShell shell) {
+    public void execute(ShellManager shell) {
         if(parameter.equals("") || parameter.contains(" ")) {
             getStringTree(shell);
         } else {
@@ -46,7 +46,7 @@ public class Tree implements Command {
         }
     }
 
-    private void getStringTree(MyShell myShell) {
+    private void getStringTree(ShellManager myShell) {
         System.out.println(myShell.getCurrentDirectory().getName());
         generateFoldersTree(myShell.getCurrentDirectory(), new StringBuilder(""));
     }

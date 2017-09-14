@@ -1,7 +1,7 @@
 package com.javaAcademy.MyShell.commands;
 
-import com.javaAcademy.MyShell.MyShell;
-import com.javaAcademy.MyShell.WrongCommandException;
+import com.javaAcademy.MyShell.shell.ShellManager;
+import com.javaAcademy.MyShell.exception.WrongCommandException;
 
 public class Statistics implements Command {
 
@@ -12,7 +12,7 @@ public class Statistics implements Command {
     }
 
     @Override
-    public void execute(MyShell shell) {
+    public void execute(ShellManager shell) {
         if(parameter.equals("")) {
             shell.showStatistics();
         } else {

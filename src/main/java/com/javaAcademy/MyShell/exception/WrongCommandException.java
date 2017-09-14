@@ -1,4 +1,4 @@
-package com.javaAcademy.MyShell;
+package com.javaAcademy.MyShell.exception;
 
 public class WrongCommandException extends RuntimeException {
 }

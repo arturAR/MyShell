@@ -2,6 +2,9 @@ package com.javaAcademy.MyShell;
 
 import com.javaAcademy.MyShell.commands.Command;
 import com.javaAcademy.MyShell.commands.CommandManager;
+import com.javaAcademy.MyShell.exception.WrongCommandException;
+import com.javaAcademy.MyShell.shell.MyShell;
+import com.javaAcademy.MyShell.shell.ShellManager;
 
 import java.util.Scanner;
 
@@ -11,19 +14,20 @@ public class Main {
 
     public static void main( String[] args ) {
         MyShell shell = new MyShell();
+        ShellManager shellManager = new ShellManager(shell);
         do {
-            UserInput userInput = getInput(shell);
+            UserInput userInput = getInput(shellManager);
             Command command = CommandManager.getCommand(userInput);
             try{
-                command.execute(shell);
-                updateStatistics(command, true, shell);
+                command.execute(shellManager);
+                updateStatistics(command, true, shellManager);
             } catch(WrongCommandException e) {
-                updateStatistics(command, false, shell);
+                updateStatistics(command, false, shellManager);
             }
-        } while (shell.isRunning());
+        } while (shellManager.isRunning());
     }
 
-    private static UserInput getInput(MyShell myShell) {
+    private static UserInput getInput(ShellManager myShell) {
         System.out.print("[MyShell] " + myShell.getPrompt());
         scanner = new Scanner(System.in);
         return parseInput(scanner.nextLine());
@@ -39,7 +43,7 @@ public class Main {
         return new UserInput(command, parameter);
     }
 
-    private static void updateStatistics(Command command, Boolean withoutErrors, MyShell shell) {
+    private static void updateStatistics(Command command, Boolean withoutErrors, ShellManager shell) {
         shell.updateStatistics(command, withoutErrors);
     }
 }

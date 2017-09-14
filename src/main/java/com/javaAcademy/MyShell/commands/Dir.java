@@ -1,7 +1,7 @@
 package com.javaAcademy.MyShell.commands;
 
-import com.javaAcademy.MyShell.MyShell;
-import com.javaAcademy.MyShell.WrongCommandException;
+import com.javaAcademy.MyShell.shell.ShellManager;
+import com.javaAcademy.MyShell.exception.WrongCommandException;
 
 import java.io.File;
 import java.util.List;
@@ -15,7 +15,7 @@ public class Dir implements Command {
     }
 
     @Override
-    public void execute(MyShell shell) {
+    public void execute(ShellManager shell) {
         if(parameter.equals("")) {
             System.out.println(displayCurrentDirectoryContents(shell));
         } else {
@@ -24,8 +24,8 @@ public class Dir implements Command {
         }
     }
 
-    private String displayCurrentDirectoryContents(MyShell myShell) {
-        List<File> contents = myShell.getFolderContents(myShell);
+    private String displayCurrentDirectoryContents(ShellManager myShell) {
+        List<File> contents = myShell.getFolderContents();
 
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("Contents of ")
